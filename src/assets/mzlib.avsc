@@ -1,0 +1,196 @@
+{
+  "type": "record",
+  "namespace": "psi.mzlib",
+  "name": "JSON_MZlib",
+  "fields": [
+    {
+      "type": {
+        "type": "record",
+        "fields": [
+          {
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "name": "all",
+            "default": null
+          }
+        ],
+        "name": "AttributeSets"
+      },
+      "name": "analyte_attribute_sets"
+    },
+    {
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "fields": [
+            {
+              "type": "string",
+              "name": "accession"
+            },
+            {
+              "type": "string",
+              "name": "name"
+            },
+            {
+              "type": [
+                "string",
+                "double",
+                "long",
+                "boolean"
+              ],
+              "name": "value"
+            },
+            {
+              "default": null,
+              "type": [
+                "null",
+                "string"
+              ],
+              "name": "unit"
+            },
+            {
+              "default": null,
+              "type": [
+                "null",
+                "string"
+              ],
+              "name": "cv_param_group"
+            },
+            {
+              "default": null,
+              "type": [
+                "null",
+                "string"
+              ],
+              "name": "value_accession"
+            }
+          ],
+          "name": "Attribute"
+        }
+      },
+      "name": "attributes"
+    },
+    {
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "name": "clusters"
+    },
+    {
+      "default": "1.0.0",
+      "type": "string",
+      "name": "format_version"
+    },
+    {
+      "type": "AttributeSets",
+      "name": "interpretation_attribute_sets"
+    },
+    {
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "fields": [
+            {
+              "type": {
+                "type": "map",
+                "values": {
+                  "type": "record",
+                  "fields": [
+                    {
+                      "type": "string",
+                      "name": "id"
+                    },
+                    {
+                      "type": {
+                        "type": "array",
+                        "items": "Attribute"
+                      },
+                      "name": "attributes"
+                    }
+                  ],
+                  "name": "Analyte"
+                }
+              },
+              "name": "analytes"
+            },
+            {
+              "type": {
+                "type": "array",
+                "items": "Attribute"
+              },
+              "name": "attributes"
+            },
+            {
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "double"
+                }
+              },
+              "name": "intensities"
+            },
+            {
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "double"
+                }
+              },
+              "name": "mzs"
+            },
+            {
+              "type": {
+                "type": "map",
+                "values": {
+                  "type": "record",
+                  "fields": [
+                    {
+                      "type": "string",
+                      "name": "id"
+                    },
+                    {
+                      "type": {
+                        "type": "array",
+                        "items": "Attribute"
+                      },
+                      "name": "attributes"
+                    }
+                  ],
+                  "name": "Interpretation"
+                }
+              },
+              "name": "interpretations"
+            },
+            {
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "name": "peak_annotations"
+            }
+          ],
+          "name": "Spectrum"
+        }
+      },
+      "name": "spectra"
+    },
+    {
+      "type": "AttributeSets",
+      "name": "spectrum_attribute_sets"
+    }
+  ]
+}

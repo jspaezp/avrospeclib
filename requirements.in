@@ -1,0 +1,16 @@
+
+loguru
+pydantic-avro
+# avro # pyre python ...
+fastavro
+mzlib @ git+https://github.com/HUPO-PSI/mzSpecLib#subdirectory=implementations/python
+
+# Development
+# TODO move to dev-requirements.txt...
+pylance
+jupyter[python]
+black
+ruff
+pytest
+pytest-datadir
+scalene

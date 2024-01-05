@@ -1,0 +1,7 @@
+
+venv
+tmp
+tmpouts
+*.egg-info
+build
+**/__pycache__
