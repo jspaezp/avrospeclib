@@ -1,6 +1,7 @@
-from pathlib import Path
-from fastavro import parse_schema
 import json
+from pathlib import Path
+
+from fastavro import parse_schema
 
 _spectrum_schema_path = Path(__file__).parent / "assets/spectrum.avsc"
 _mzlib_schema_path = Path(__file__).parent / "assets/mzlib.avsc"

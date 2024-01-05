@@ -1,11 +1,11 @@
-from typing import List, Optional  # noqa: UP035
+from typing import Optional  # noqa: UP035
 
 from pydantic import Field, field_validator, model_validator
 from pydantic_avro.base import AvroBase
 
 
 class AttributeSets(AvroBase):
-    all: List[str] = Field(default_factory=list, alias="all")
+    all: list[str] = Field(default_factory=list, alias="all")
 
 
 class Attribute(AvroBase):
@@ -38,29 +38,29 @@ class Attribute(AvroBase):
 
 class Interpretation(AvroBase):
     id: str
-    attributes: List[Attribute]
+    attributes: list[Attribute]
 
 
 class Analyte(AvroBase):
     id: str
-    attributes: List[Attribute]
+    attributes: list[Attribute]
 
 
 class Spectrum(AvroBase):
     analytes: dict[str, Analyte]
-    attributes: List[Attribute]
-    intensities: List[float]
-    mzs: List[float]
+    attributes: list[Attribute]
+    intensities: list[float]
+    mzs: list[float]
     interpretations: dict[str, Interpretation]
-    peak_annotations: List[str]
+    peak_annotations: list[str]
 
     @field_validator("peak_annotations")
     @classmethod
-    def must_be_valid_peak_annotations(cls, vl: List[str]) -> str:
+    def must_be_valid_peak_annotations(cls, vl: list[str]) -> str:
         for v in vl:
             if v == "?":
                 continue
-            if not v[0] in {"a", "b", "c", "x", "y", "z", "p", "m", "I"}:
+            if v[0] not in {"a", "b", "c", "x", "y", "z", "p", "m", "I"}:
                 msg = "Peak annotation must start with a, b, c, x, y, z, or p"
                 msg += f" but got {v}"
                 raise ValueError(msg)
@@ -78,11 +78,11 @@ class Spectrum(AvroBase):
         return self
 
 
-class JSON_MZlib(AvroBase):
+class JsonMzlib(AvroBase):
     analyte_attribute_sets: AttributeSets
-    attributes: List[Attribute]
-    clusters: List[str]
+    attributes: list[Attribute]
+    clusters: list[str]
     format_version: str = Field("1.0.0")
     interpretation_attribute_sets: AttributeSets
-    spectra: List[Spectrum]
+    spectra: list[Spectrum]
     spectrum_attribute_sets: AttributeSets

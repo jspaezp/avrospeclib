@@ -25,8 +25,8 @@ with open("test.avro", "rb") as fp:
 
 ## Pydantic validation
 
-from src.pydantic_model import JSON_MZlib
+from src.pydantic_model import JsonMzlib
 
-json_mzlib = JSON_MZlib(**data)
+json_mzlib = JsonMzlib(**data)
 json_mzlib.spectra[0]
 ```

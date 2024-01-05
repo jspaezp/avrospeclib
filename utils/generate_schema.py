@@ -8,11 +8,11 @@ from fastavro import parse_schema, reader, writer
 from fastavro.schema import Schema
 from loguru import logger
 
-from src.pydantic_model import JSON_MZlib, Spectrum
+from src.pydantic_model import JsonMzlib, Spectrum
 
 
 @contextmanager
-def timer(name: str):
+def timer(name: str) -> None:
     """Context manager to time a block of code.
 
     Parameters
@@ -44,6 +44,7 @@ def write_spectrum_schema(out_file: str) -> None:
     """
     with open(out_file, "w") as f:
         f.write(json.dumps(Spectrum.avro_schema(namespace="psi.mzlib"), indent=2))
+        f.write("\n")
 
 
 def write_mzlib_schema(out_file: str) -> None:
@@ -56,7 +57,8 @@ def write_mzlib_schema(out_file: str) -> None:
         Example: "tests/data/test.avsc"
     """
     with open(out_file, "w") as f:
-        f.write(json.dumps(JSON_MZlib.avro_schema(namespace="psi.mzlib"), indent=2))
+        f.write(json.dumps(JsonMzlib.avro_schema(namespace="psi.mzlib"), indent=2))
+        f.write("\n")
 
 
 def _main(
@@ -64,7 +66,7 @@ def _main(
     mzlib_schema: Schema,
     spectrum_schema: Schema,
     tmpdir: str | None,
-):
+) -> None:
     with open(json_file_test) as f:
         data = json.load(f)
 
@@ -97,11 +99,11 @@ def _main(
                 # Not having a schema reader is 6x faster in my system...
 
         with timer("avro read validation"):
-            test_model = JSON_MZlib(**avro_data[0])
+            test_model = JsonMzlib(**avro_data[0])
 
         # Also do some baseline read, validate, write
         with timer("pydantic validation"):
-            test_model = JSON_MZlib(**data)
+            test_model = JsonMzlib(**data)
 
         with timer("pydantic write"):
             with open(tmpdir / "test.json", "w") as f:
@@ -113,7 +115,7 @@ def _main(
 
         with timer("pydantic read"):
             with open(tmpdir / "test.json") as f:
-                _ = JSON_MZlib(**json.load(f))
+                _ = JsonMzlib(**json.load(f))
 
 
 if __name__ == "__main__":
