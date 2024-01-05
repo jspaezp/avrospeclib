@@ -5,7 +5,6 @@ from pathlib import Path
 from time import monotonic
 
 from fastavro import parse_schema, reader, writer
-from fastavro.schema import Schema
 from loguru import logger
 
 from src.pydantic_model import JsonMzlib, Spectrum
@@ -63,8 +62,8 @@ def write_mzlib_schema(out_file: str) -> None:
 
 def _main(
     json_file_test: str,
-    mzlib_schema: Schema,
-    spectrum_schema: Schema,
+    mzlib_schema,  # noqa: ANN001
+    spectrum_schema,  # noqa: ANN001
     tmpdir: str | None,
 ) -> None:
     with open(json_file_test) as f:
